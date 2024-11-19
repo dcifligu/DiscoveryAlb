@@ -19,16 +19,6 @@ export default {
         { text: 'En', href: '#', code: 'gb' },
         { text: 'AL', href: '#', code: 'al' }
       ],
-      places: [
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-        { text: 'PlaceName', href: '#' },
-      ],
       lastScrollY: 0,
       isOpen: false,
       isNavVisible: true,
@@ -175,12 +165,11 @@ export default {
    </div>
    <transition
  enter-active-class="animate-slideDown"
- leave-active-class="animate-slideUp"
->
+ leave-active-class="animate-slideUp">
  <div v-if="isHoveredList"
       @mouseover="handleMouseOverList"
       @mouseleave="handleMouseLeaveList" >
-   <DropdownLists :places="places" />
+   <DropdownLists />
  </div>
 </transition>
 

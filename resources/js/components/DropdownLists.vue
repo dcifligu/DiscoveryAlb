@@ -71,7 +71,7 @@ export default {
               </li>
             </ul>
           </div>
-          <div class="flex flex-col h-full w-2/4">
+          <div class="flex flex-col h-full w-2/4 mx-2">
             <span class="text-4xl font-semibold pb-4">
               {{ selectedPlace.displayText }}
             </span>
