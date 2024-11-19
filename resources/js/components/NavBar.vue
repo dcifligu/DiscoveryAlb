@@ -2,113 +2,118 @@
 import DropdownMobile from './DropdownMobile.vue';
 import DropdownLists from './DropdownLists.vue';
 
-
 export default {
- name: 'NavBar',
- components: {
-   DropdownMobile,
-   DropdownLists
- },
- data() {
-   return {
-     navItems: [
-       { text: 'Places to be', href: '#' },
-       { text: 'Things to do', href: '#' },
-       { text: 'Other', href: '#' }
-     ],
-     languages: [
-       { text: 'En', href: '#', code: 'gb' },
-       { text: 'AL', href: '#', code: 'al' }
-     ],
-     places: [
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-       { text: 'PlaceName', href: '#' },
-     ],
-     lastScrollY: 0,
-     isOpen: false,
-     isNavVisible: true,
-     scrollTimeout: null,
-     isHovered: false ,
-     isHoveredList: false,
-     clicked: false
-   };
- },
- computed: {
-   hoveredStyle() {
-     return this.isHovered ? { boxShadow: '0px 2px 20px 0px #666565bc' } : {};
-   }
- },
- methods: {
-   handleClick() {
-     this.$emit('toggle-search-modal');
-   },
-   toggleMenu(event) {
-     event.stopPropagation();
-     this.isOpen = !this.isOpen;
-     this.clicked = !this.clicked;
-   },
-   closeMenu(e) {
-     if (!this.$el.contains(e.target)) {
-       this.isOpen = false;
-       this.clicked = false;
-     }
-   },
-   handleScroll() {
-     clearTimeout(this.scrollTimeout);
-     if (window.scrollY > this.lastScrollY) {
-       this.isNavVisible = false;
-       this.isOpen = false;
-       this.scrollTimeout = setTimeout(() => {
-         this.isNavVisible = true;
-       }, 2000);
-     } else {
-       this.isNavVisible = false;
-       this.scrollTimeout = setTimeout(() => {
-         this.isNavVisible = true;
-       }, 500);
-     }
-     this.lastScrollY = window.scrollY;
-   },
-   handleMouseOver() {
-     this.isHovered = true;
-   },
-   handleMouseLeave() {
-     this.isHovered = false;
-   },
-   handleMouseOverList() {
-     this.isHovered = true;
-     this.isHoveredList = true;
-   },
-   handleMouseLeaveList() {
-     this.isHovered = false;
-     this.isHoveredList = false;
-   }
- },
- watch: {
-   isOpen(val) {
-     if (val) {
-       window.addEventListener('click', this.closeMenu);
-     } else {
-       window.removeEventListener('click', this.closeMenu);
-     }
-   }
- },
- mounted() {
-   window.addEventListener('scroll', this.handleScroll);
- },
- beforeDestroy() {
-   window.removeEventListener('scroll', this.handleScroll);
-   window.removeEventListener('click', this.closeMenu);
- }
+  name: 'NavBar',
+  components: {
+    DropdownMobile,
+    DropdownLists
+  },
+  data() {
+    return {
+      navItems: [
+        { text: 'Places to be', href: '#' },
+        { text: 'Things to do', href: '#' },
+        { text: 'Other', href: '#' }
+      ],
+      languages: [
+        { text: 'En', href: '#', code: 'gb' },
+        { text: 'AL', href: '#', code: 'al' }
+      ],
+      places: [
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+        { text: 'PlaceName', href: '#' },
+      ],
+      lastScrollY: 0,
+      isOpen: false,
+      isNavVisible: true,
+      scrollTimeout: null,
+      isHovered: false,
+      isHoveredList: false,
+      clicked: false,
+      hideDropdownTimeout: null
+    };
+  },
+  computed: {
+    hoveredStyle() {
+      return this.isHovered ? { boxShadow: '0px 2px 20px 0px #666565bc' } : {};
+    }
+  },
+  methods: {
+    handleClick() {
+      this.$emit('toggle-search-modal');
+    },
+    toggleMenu(event) {
+      event.stopPropagation();
+      this.isOpen = !this.isOpen;
+      this.clicked = !this.clicked;
+    },
+    closeMenu(e) {
+      if (!this.$el.contains(e.target)) {
+        this.isOpen = false;
+        this.clicked = false;
+      }
+    },
+    handleScroll() {
+      clearTimeout(this.scrollTimeout);
+      if (window.scrollY > this.lastScrollY) {
+        this.isNavVisible = false;
+        this.isOpen = false;
+        this.scrollTimeout = setTimeout(() => {
+          this.isNavVisible = true;
+        }, 2000);
+      } else {
+        this.isNavVisible = false;
+        this.scrollTimeout = setTimeout(() => {
+          this.isNavVisible = true;
+        }, 500);
+      }
+      this.lastScrollY = window.scrollY;
+    },
+    handleMouseOver() {
+      clearTimeout(this.hideDropdownTimeout);
+      this.isHovered = true;
+    },
+    handleMouseLeave() {
+      this.hideDropdownTimeout = setTimeout(() => {
+        this.isHovered = false;
+      }, 500);
+    },
+    handleMouseOverList() {
+      clearTimeout(this.hideDropdownTimeout);
+      this.isHovered = true;
+      this.isHoveredList = true;
+    },
+    handleMouseLeaveList() {
+      this.hideDropdownTimeout = setTimeout(() => {
+        this.isHovered = false;
+        this.isHoveredList = false;
+      }, 1000);
+    }
+  },
+  watch: {
+    isOpen(val) {
+      if (val) {
+        window.addEventListener('click', this.closeMenu);
+      } else {
+        window.removeEventListener('click', this.closeMenu);
+      }
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('click', this.closeMenu);
+  }
 };
 </script>
-
 
 <template>
  <div :class="['fixed z-20 top-0 w-full transition-transform duration-300', { '-translate-y-full': !isNavVisible }]">
@@ -172,7 +177,9 @@ export default {
  enter-active-class="animate-slideDown"
  leave-active-class="animate-slideUp"
 >
- <div v-if="isHoveredList" >
+ <div v-if="isHoveredList"
+      @mouseover="handleMouseOverList"
+      @mouseleave="handleMouseLeaveList" >
    <DropdownLists :places="places" />
  </div>
 </transition>
