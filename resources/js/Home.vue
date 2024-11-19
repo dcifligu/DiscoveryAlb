@@ -3,6 +3,7 @@ import NavBar from './components/NavBar.vue';
 import LogoOverlay from './components/LogoOverlay.vue';
 import Hero from './components/Hero.vue';
 import SearchModal from './components/SearchModal.vue';
+import FooterComponent from './components/FooterComponent.vue';
 
 
 export default {
@@ -12,6 +13,7 @@ export default {
    LogoOverlay,
    Hero,
    SearchModal,
+   FooterComponent
  },
  data() {
    return {
@@ -34,5 +36,6 @@ export default {
      <Hero />
      <div class="h-screen w-full">
      </div>
+     <FooterComponent />
    </div>
 </template>
