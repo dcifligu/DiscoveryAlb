@@ -9,8 +9,8 @@ class WeatherController extends Controller
 {
     public function getWeather($place)
     {
-        $apiKey = '888ec30639884a8bbd494910241911';
-        $response = Http::get("http://api.weatherapi.com/v1/current.json?key={$apiKey}&q={$place}");
-        return $response->json();
+        // $apiKey = '888ec30639884a8bbd494910241911';
+        // $response = Http::get("http://api.weatherapi.com/v1/current.json?key={$apiKey}&q={$place}");
+        // return $response->json();
     }
 }

@@ -4,10 +4,10 @@ export default {
   data() {
     return {
       places: [
-        { displayText: 'Tirana', apiText: 'Tirana', href: '#' },
-        { displayText: 'Korçë', apiText: 'Korce', href: '#' },
-        { displayText: 'Durrës', apiText: 'Durres', href: '#' },
-        { displayText: 'Shkodër', apiText: 'Shkoder', href: '#' },
+        { displayText: 'Tirana', apiText: 'Tirana', href: '#', displayInfo: 'Capital of Albania' },
+        { displayText: 'Korçë', apiText: 'Korce', href: '#', displayInfo: 'City in Albania' },
+        { displayText: 'Durrës', apiText: 'Durres', href: '#', displayInfo: 'City in Albania' },
+        { displayText: 'Shkodër', apiText: 'Shkoder', href: '#', displayInfo: 'City in Albania' },
       ],
       weather: {
         temp_c: null,
@@ -17,7 +17,8 @@ export default {
           icon: ''
         }
       },
-      selectedPlace: { displayText: 'Tirana', apiText: 'Tirana' }
+      selectedPlace: { displayText: 'Tirana', apiText: 'Tirana', displayInfo: 'Capital of Albania'},
+      hoveredPlace: null
     }
   },
   mounted() {
@@ -39,6 +40,9 @@ export default {
     selectPlace(place) {
       this.selectedPlace = place;
       this.fetchWeatherData(place.apiText);
+    },
+    setHoveredPlace(place) {
+      this.hoveredPlace = place;
     }
   }
 }
@@ -48,17 +52,19 @@ export default {
   <div class="fixed w-full h-fit bg-[#F9F9F9] z-0 rounded-b-xl">
     <div class="h-full w-full">
       <div class="m-6">
-        <div class="flex flex-row py-3 justify-start">
+        <div class="flex flex-row py-3 justify-start gap-1">
           <div class="flex flex-col h-full w-1/4">
             <span class="font-bold text-4xl pb-4">
               Places to be
             </span>
             <ul>
-              <li v-for="item in places"
+              <li v-for="item in places" id="places-list"
                   :key="item.apiText"
-                  class="py-1 hover:bg-[#f2f2f2]">
-                <a @click.prevent="selectPlace(item)" class="flex flex-row text-xl">
-                  <span>
+                  class="py-1 cursor-pointer"
+                  @mouseover="setHoveredPlace(item)"
+                  @mouseleave="setHoveredPlace(null)">
+                <a @click.prevent="selectPlace(item)" class="flex flex-row text-xl p-1 -pr-2 hover:bg-[#f2f2f2] rounded-3xl px-2">
+                  <span :class="{'underline-effect-lists': item.apiText === selectedPlace.apiText || item.apiText === hoveredPlace?.apiText}">
                     {{ item.displayText }}
                   </span>
                 </a>
@@ -70,7 +76,7 @@ export default {
               {{ selectedPlace.displayText }}
             </span>
             <span class="text-lg font-thin w-2/3 text-pretty">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius assumenda perspiciatis ut repellendus odit! Omnis, veritatis blanditiis ratione dignissimos rerum dicta, repellendus delectus sint voluptate harum et dolor nihil? Molestiae?
+              {{ selectedPlace.displayInfo }}  
             </span>
           </div>
           <div class="flex flex-col h-full w-1/4">
