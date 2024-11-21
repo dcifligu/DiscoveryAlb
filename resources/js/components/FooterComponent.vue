@@ -42,24 +42,24 @@
             <p class="text-xs mt-4">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt, eaque aliquam! Architecto veritatis quia necessitatibus recusandae vitae soluta, deserunt illo reiciendis accusamus repellat corporis inventore! Fuga, tempora? Deleniti, commodi molestias.
             </p>
-            <div class="flex flex-row gap-12 py-4 my-2">
+            <div class="flex flex-row gap-12 py-4 my-2 ">
                 <ul class=" flex flex-col gap-4 text-xl font-semibold">
                     <li v-for="item in footerItemsRow1" :key="item.text">
-                        <a :href="item.href" class="hover:text-[#2c7474] active:-[#3b9999]">{{ item.text }}</a>
+                        <a :href="item.href" class="hover:text-[#3b9999] transition-all duration-300">{{ item.text }}</a>
                     </li>
                 </ul>
                 <ul class=" flex flex-col gap-4 text-xl font-semibold">
                     <li v-for="item in footerItemsRow2" :key="item.text">
-                        <a :href="item.href" class="hover:text-[#2c7474] active:-[#3b9999]">{{ item.text }}</a>
+                        <a :href="item.href" class="hover:text-[#3b9999] transition-all duration-300">{{ item.text }}</a>
                     </li>
                 </ul>
                 <ul class=" flex flex-col gap-4 text-xl font-semibold">
                     <li v-for="item in footerItemsRow3" :key="item.text">
-                        <a :href="item.href" class="hover:text-[#2c7474] active:text-[#3b9999] transition-all duration-300">{{ item.text }}</a>
+                        <a :href="item.href" class="hover:text-[#3b9999] transition-all duration-300">{{ item.text }}</a>
                     </li>
                 </ul>
             </div>
-            <a href="mailto:info@discover.com" class="hover:text-[#2c7474] active:text-[#3b9999] transition-all duration-300">info@discover.com</a>
+            <a href="mailto:info@discover.com" class="hover:text-[#3b9999] transition-all duration-300">info@discover.com</a>
             </div>
             <span class="text-center">
                 &copy; 2024 Discover Today. All rights reserved.

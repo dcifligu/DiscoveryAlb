@@ -3,6 +3,7 @@ import DropdownMobile from './DropdownMobile.vue';
 import DropdownLists from './DropdownLists.vue';
 
 export default {
+  
   name: 'NavBar',
   components: {
     DropdownMobile,
@@ -26,7 +27,8 @@ export default {
       isHovered: false,
       isHoveredList: false,
       clicked: false,
-      hideDropdownTimeout: null
+      hideDropdownTimeout: null,
+      hoveredItem: null
     };
   },
   computed: {
@@ -34,35 +36,30 @@ export default {
       return this.isHovered ? { boxShadow: '0px 2px 20px 0px #666565bc' } : {};
     }
   },
+  watch: {
+    hoveredItem(newVal) {
+      console.log('hoveredItem:', newVal);
+    }
+  },
   methods: {
     handleClick() {
       this.$emit('toggle-search-modal');
     },
-    toggleMenu(event) {
-      event.stopPropagation();
-      this.isOpen = !this.isOpen;
-      this.clicked = !this.clicked;
-    },
-    closeMenu(e) {
-      if (!this.$el.contains(e.target)) {
-        this.isOpen = false;
-        this.clicked = false;
-      }
-    },
     handleScroll() {
       clearTimeout(this.scrollTimeout);
-      if (window.scrollY > this.lastScrollY) {
+      
+      if (window.scrollY > 50) {
         this.isNavVisible = false;
+        this.isHovered = false;
+        this.isHoveredList = false;
         this.isOpen = false;
         this.scrollTimeout = setTimeout(() => {
           this.isNavVisible = true;
         }, 2000);
       } else {
-        this.isNavVisible = false;
-        this.scrollTimeout = setTimeout(() => {
-          this.isNavVisible = true;
-        }, 500);
+        this.isNavVisible = true;
       }
+      
       this.lastScrollY = window.scrollY;
     },
     handleMouseOver() {
@@ -74,25 +71,19 @@ export default {
         this.isHovered = false;
       }, 500);
     },
-    handleMouseOverList() {
+    handleMouseOverList(item) {
       clearTimeout(this.hideDropdownTimeout);
       this.isHovered = true;
       this.isHoveredList = true;
+      this.hoveredItem = item.text; 
+      
     },
     handleMouseLeaveList() {
       this.hideDropdownTimeout = setTimeout(() => {
         this.isHovered = false;
         this.isHoveredList = false;
+        this.hoveredItem = null;
       }, 1000);
-    }
-  },
-  watch: {
-    isOpen(val) {
-      if (val) {
-        window.addEventListener('click', this.closeMenu);
-      } else {
-        window.removeEventListener('click', this.closeMenu);
-      }
     }
   },
   mounted() {
@@ -103,8 +94,8 @@ export default {
     window.removeEventListener('click', this.closeMenu);
   }
 };
-</script>
 
+</script>
 <template>
  <div :class="['fixed z-20 top-0 w-full transition-transform duration-300', { '-translate-y-full': !isNavVisible }]">
    <div class="w-full h-30 relative border-b-[0.5px] border-b-white z-10">
@@ -122,9 +113,14 @@ export default {
            </span>
          </div>
          <ul class="h-full w-fit gap-24 flex-row items-center font-normal text-lg hidden lg:flex">
-           <li v-for="item in navItems" :key="item.text">
-             <a :href="item.href" class="underline-effect child-item" @mouseover="handleMouseOverList" @mouseleave="handleMouseLeaveList">{{ item.text }}</a>
-           </li>
+            <li v-for="item in navItems" :key="item.text">
+              <a :href="item.href" 
+                class="underline-effect child-item hover:text-[#3b9999]" 
+                @mouseover="handleMouseOverList(item)" 
+                @mouseleave="handleMouseLeaveList">
+                {{ item.text }}
+              </a>
+            </li>
          </ul>
          <div class="w-fit h-full flex-row flex items-center gap-4">
            <div class="flex-row hidden lg:flex child-item cursor-pointer relative" 
@@ -163,18 +159,12 @@ export default {
        </div>
      </div>
    </div>
-   <transition
- enter-active-class="animate-slideDown"
- leave-active-class="animate-slideUp">
- <div v-if="isHoveredList"
-      @mouseover="handleMouseOverList"
-      @mouseleave="handleMouseLeaveList" >
-   <DropdownLists />
- </div>
-</transition>
-
-
- </div>
+   <transition enter-active-class="animate-slideDown" leave-active-class="animate-slideUp">
+      <div v-if="isHoveredList" @mouseover="handleMouseOverList" @mouseleave="handleMouseLeaveList">
+        <DropdownLists :active-section="hoveredItem" />
+      </div>
+    </transition>   
+  </div>
 </template>
 
 

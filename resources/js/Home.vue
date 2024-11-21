@@ -4,6 +4,7 @@ import LogoOverlay from './components/LogoOverlay.vue';
 import Hero from './components/Hero.vue';
 import SearchModal from './components/SearchModal.vue';
 import FooterComponent from './components/FooterComponent.vue';
+import CheckLink from './components/CheckLink.vue';
 
 
 export default {
@@ -13,7 +14,8 @@ export default {
    LogoOverlay,
    Hero,
    SearchModal,
-   FooterComponent
+   FooterComponent,
+   CheckLink
  },
  data() {
    return {
