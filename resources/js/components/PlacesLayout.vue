@@ -1,7 +1,6 @@
-<!-- PlacesLayout.vue -->
 <script>
 export default {
-  name: 'places-layout',  // Changed to kebab-case
+  name: 'places-layout',
   props: {
     items: {
       type: Array,
