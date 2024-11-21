@@ -47,7 +47,6 @@ export default {
     },
     handleScroll() {
       clearTimeout(this.scrollTimeout);
-      
       if (window.scrollY > 50) {
         this.isNavVisible = false;
         this.isHovered = false;

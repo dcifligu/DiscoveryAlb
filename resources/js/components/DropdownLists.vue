@@ -25,14 +25,14 @@ export default {
         { displayText: 'Shkodër', apiText: 'Shkoder', href: '#', displayInfo: 'Shkodër Text' },
       ],
       thingsToDo: [
-        { displayText: 'Museums', href: '#', displayInfo: 'Explore local museums' },
-        { displayText: 'Restaurants', href: '#', displayInfo: 'Local cuisine' },
-        { displayText: 'Events', href: '#', displayInfo: 'Upcoming events' },
+        // { displayText: 'Museums', href: '#', displayInfo: 'Explore local museums' },
+        // { displayText: 'Restaurants', href: '#', displayInfo: 'Local cuisine' },
+        // { displayText: 'Events', href: '#', displayInfo: 'Upcoming events' },
       ],
       other: [
-        { displayText: 'Transport', href: '#', displayInfo: 'Transportation info' },
-        { displayText: 'Hotels', href: '#', displayInfo: 'Accommodation options' },
-        { displayText: 'Emergency', href: '#', displayInfo: 'Emergency contacts' },
+        // { displayText: 'Transport', href: '#', displayInfo: 'Transportation info' },
+        // { displayText: 'Hotels', href: '#', displayInfo: 'Accommodation options' },
+        // { displayText: 'Emergency', href: '#', displayInfo: 'Emergency contacts' },
       ],
       weather: {
         temp_c: null,
@@ -73,7 +73,6 @@ export default {
     }
   },
   watch: {
-    // Initialize selectedPlace when currentItems changes
     currentItems: {
       immediate: true,
       handler(items) {
