@@ -45,6 +45,17 @@ export default {
     handleClick() {
       this.$emit('toggle-search-modal');
     },
+    toggleMenu(event) {
+      event.stopPropagation();
+      this.isOpen = !this.isOpen;
+      this.clicked = !this.clicked;
+    },
+    closeMenu(e) {
+      if (!this.$el.contains(e.target)) {
+        this.isOpen = false;
+        this.clicked = false;
+      }
+    },
     handleScroll() {
       clearTimeout(this.scrollTimeout);
       if (window.scrollY > 50) {

@@ -28,14 +28,14 @@ export default {
       <div class="m-6">
         <div class="flex flex-row py-3 justify-start gap-1">
           <div class="flex flex-col h-full w-1/4">
-            <span class="font-bold text-4xl pb-4">
+            <h1 class="font-bold text-4xl pb-4">
               Places to be
-            </span>
+            </h1>
             <ul>
               <li v-for="item in items" 
                   :key="item.apiText"
                   id="places-list"
-                  class="py-1 cursor-pointer"
+                  class="py-1 cursor-pointer transition-all duration-300"
                   @mouseover="$emit('hover', item)"
                   @mouseleave="$emit('leave', null)">
                 <a @click.prevent="$emit('select', item)" 
