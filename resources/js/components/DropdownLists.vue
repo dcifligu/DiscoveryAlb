@@ -25,14 +25,14 @@ export default {
         { displayText: 'Shkodër', apiText: 'Shkoder', href: '#', displayInfo: 'Shkodër Text' },
       ],
       thingsToDo: [
-        { displayText: 'Museums', href: '#', displayInfo: 'Explore local museums' },
-        { displayText: 'Restaurants', href: '#', displayInfo: 'Local cuisine' },
-        { displayText: 'Events', href: '#', displayInfo: 'Upcoming events' },
+        // { displayText: 'Museums', href: '#', displayInfo: 'Explore local museums' },
+        // { displayText: 'Restaurants', href: '#', displayInfo: 'Local cuisine' },
+        // { displayText: 'Events', href: '#', displayInfo: 'Upcoming events' },
       ],
       other: [
-        { displayText: 'Transportation', href: '#', displayInfo: 'Transportation info' },
-        { displayText: 'Documents', href: '#', displayInfo: 'Neccesary documents for traveling' },
-        { displayText: 'Emergency', href: '#', displayInfo: 'Emergency contacts' },
+        // { displayText: 'Transportation', href: '#', displayInfo: 'Transportation info' },
+        // { displayText: 'Documents', href: '#', displayInfo: 'Neccesary documents for traveling' },
+        // { displayText: 'Emergency', href: '#', displayInfo: 'Emergency contacts' },
       ],
       weather: {
         temp_c: null,
@@ -56,7 +56,7 @@ export default {
         case 'Other':
           return this.other;
         default:
-          return this.places;
+          return this.currentItems;
       }
     },
     currentComponent() {
@@ -68,7 +68,8 @@ export default {
         case 'Other':
           return 'other-layout';
         default:
-          return 'places-layout';
+          return this.currentComponent;
+
       }
     }
   },

@@ -13,7 +13,7 @@ export default {
         <div class="flex flex-row py-3 justify-start gap-1">
           <div class="flex flex-col h-full w-1/4">
             <h1 class="font-bold text-4xl pb-4">
-              Places to be
+              Others
             </h1>
           </div>
         </div>
