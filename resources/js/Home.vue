@@ -6,6 +6,7 @@ import SearchModal from './components/SearchModal.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import CheckLink from './components/CheckLink.vue';
 import CardCarousel from './components/CardCarousel.vue';
+import RegionsComponent from './components/RegionsComponent.vue';
 
 export default {
     name: 'Home',
@@ -16,7 +17,8 @@ export default {
         SearchModal,
         FooterComponent,
         CheckLink,
-        CardCarousel
+        CardCarousel,
+        RegionsComponent
     },
     data() {
         return {
@@ -40,6 +42,8 @@ export default {
         <NavBar @toggle-search-modal="toggleSearchModal"/>
         <Hero />
         <CardCarousel />
+        <RegionsComponent />
         <FooterComponent />
+
     </div>
 </template>
