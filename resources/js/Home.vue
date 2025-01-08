@@ -42,7 +42,7 @@ export default {
         <NavBar @toggle-search-modal="toggleSearchModal"/>
         <Hero />
         <CardCarousel />
-        <RegionsComponent />
+        <div class="py-12"></div>
         <FooterComponent />
 
     </div>

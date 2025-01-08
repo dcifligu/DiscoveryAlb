@@ -43,7 +43,9 @@ export default {
   },
   methods: {
     handleClick() {
+      this.isHoveredList = false;
       this.$emit('toggle-search-modal');
+      
     },
     toggleMenu(event) {
       event.stopPropagation();

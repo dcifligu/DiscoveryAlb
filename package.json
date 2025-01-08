@@ -15,6 +15,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "@vitejs/plugin-vue": "^5.2.0",
         "flag-icons": "^7.2.3",
         "vue": "^3.5.13",
